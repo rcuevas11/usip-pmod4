@@ -40,8 +40,22 @@ export const create = (req, res) => {
 };
 
 export const list = (req, res) => {
-  res.json("hola desde usuarios controller en la accion list");
+  Usuario.findAll(
+    {
+      attributes: [
+        'id', 'usuario', 'correo', 'nombre', 'apellido',
+        'celular', 'createdAt', 'updatedAt'
+      ]
+    }
+  )
+    .then((data) => res.send(data))
+    .catch((error) => {
+      res.status(500).send({
+        message: error.message,
+      });
+    });
 };
+
 
 export const detail = (req, res) => {
   res.json("hola desde usuarios controller en la accion detail");

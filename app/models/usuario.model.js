@@ -1,6 +1,7 @@
 import { sequelize } from "./index.js";
 import { DataTypes } from "sequelize";
 import Role from "./rol.model.js";
+import Carrito from "./carrito.model.js";
 
 const Usuario = sequelize.define("usuarios", {
   usuario: {
@@ -24,6 +25,8 @@ const Usuario = sequelize.define("usuarios", {
     allowNull: false,
   },
 });
+
+// Usuario.hasMany(Carrito, { foreignKey: 'carrito_usuario' });
 
 Usuario.belongsToMany(Role, {
   through: "user_role",

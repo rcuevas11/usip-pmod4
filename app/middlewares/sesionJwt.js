@@ -73,3 +73,28 @@ export const onlyJuan = (req, res, next) => {
     });
   });
 };
+
+
+export const esUsuario = (req, res, next) => {
+  Usuario.findByPk(req.userIdDecoded, {
+    include: [
+      {
+        model: Role,
+        as: "roles",
+        attributes: ["id", "rol"],
+      },
+    ],
+  }).then((user) => {
+    const { roles } = user;
+    for (let i = 0; i < roles.length; i++) {
+      if (roles[i].rol == "USUARIO") {
+        next();
+        return;
+      }
+    }
+
+    res.status(403).send({
+      mensaje: "Usted no tiene el rol necesario!",
+    });
+  });
+};

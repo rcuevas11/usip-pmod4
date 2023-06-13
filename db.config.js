@@ -2,7 +2,7 @@ const config = {
     HOST: "127.0.0.1",
     USER: "postgres",
     PASSWORD: "postgres",
-    DB: "proyecto",
+    DB: "proyecto.mod4",
     dialect: "postgres",
     pool: {
         max: 5,

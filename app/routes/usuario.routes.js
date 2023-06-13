@@ -1,7 +1,7 @@
 import express, { Router } from "express";
 
 import { create, list, detail } from "../controllers/usuario.controller.js";
-import { verificarToken, esAdmin } from "../middlewares/sesionJwt.js";
+import { verificarToken, esAdmin, esUsuario } from "../middlewares/sesionJwt.js";
 
 const app = express();
 const usuarios = Router();
@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 
 usuarios.post("/usuarios", [verificarToken, esAdmin], create);
 
-usuarios.get("/usuarios", list);
+usuarios.get("/usuarios", [verificarToken, esUsuario], list);
 
 usuarios.get("/usuarios/:id", detail);
 
